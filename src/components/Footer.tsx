@@ -44,7 +44,7 @@ const Footer = () => {
     { 
       icon: Github, 
       name: "GitHub", 
-      href: "https://github.com/ashirvad",
+      href: "https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/",
       color: "hover:text-white"
     },
     { 

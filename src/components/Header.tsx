@@ -61,17 +61,12 @@ const Header = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/ashirvad' },
+    { icon: Github, href: 'https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/' },
     { icon: Linkedin, href: 'https://linkedin.com/in/ashirvad' },
     { icon: Mail, href: 'mailto:ashirvad2912@gmail.com' },
   ];
 
-  const cities = [
-    { name: "New Delhi", date: "Jan 15, 2024", status: "Completed" },
-    { name: "Mumbai", date: "Feb 20, 2024", status: "Completed" },
-    { name: "Bangalore", date: "Mar 10, 2024", status: "Upcoming" },
-    { name: "Hyderabad", date: "Apr 5, 2024", status: "Upcoming" },
-  ];
+ 
 
   return (
     <>

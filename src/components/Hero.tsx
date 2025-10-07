@@ -95,7 +95,12 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} id="home" className="h-screen flex items-center justify-center relative overflow-hidden pt-20 pb-10">
+ <section
+  ref={heroRef}
+  id="home"
+  className="min-h-[70vh] flex items-center justify-center relative overflow-hidden pt-20 pb-10"
+>
+
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       
@@ -113,8 +118,8 @@ const Hero = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="hero-title heading-xl mb-6">
-            <RollingText text="Ashirvad Singh" delay={0.3} />
+          <h1 className="hero-title heading-xl mb-6 text-foreground">
+            Ashirvad Singh
           </h1>
 
           {/* Subtitle */}

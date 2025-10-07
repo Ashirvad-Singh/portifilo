@@ -43,14 +43,15 @@ const RollingText = ({ text, className = '', delay = 0 }: RollingTextProps) => {
   };
 
   return (
-    <motion.div
-      ref={ref}
-      className={`inline-block ${className}`}
-      style={{ perspective: "1000px" }}
-      variants={container}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-    >
+  <motion.div
+  ref={ref}
+  className={`inline-block ${className}`}
+  style={{ perspective: "1000px" }}
+  variants={container}
+  initial="hidden"
+  animate={isInView ? "visible" : "visible"} // ✅ Always visible
+>
+
       <div className="inline-flex flex-wrap gap-x-2">
         {words.map((word, wordIndex) => (
           <span key={wordIndex} className="inline-flex">

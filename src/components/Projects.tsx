@@ -19,7 +19,7 @@ const Projects = () => {
       icon: GraduationCap,
       tech: ["MongoDB", "Express", "React", "Node.js", "JWT"],
       links: {
-        github: "https://github.com/Ashirvad-Singh",
+        github: "https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/-Singh",
         demo: "#"
       },
       features: [
@@ -59,7 +59,7 @@ const Projects = () => {
       tech: ["React", "Redux", "API", "Tailwind CSS"],
       links: {
         demo: "#",
-        github: "https://github.com/Ashirvad-Singh"
+        github: "https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/-Singh"
       },
       features: [
         "Search & Filter Pokémon",
@@ -79,7 +79,7 @@ const Projects = () => {
       tech: ["WordPress", "PHP", "Tailwind CSS", "JavaScript"],
       links: {
         demo: "#",
-        github: "https://github.com/Ashirvad-Singh"
+        github: "https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/-Singh"
       },
       features: [
         "Custom Post Types",
@@ -117,7 +117,7 @@ const Projects = () => {
       icon: Database,
       tech: ["MySQL", "PHP", "JavaScript", "Chart.js"],
       links: {
-        github: "https://github.com/Ashirvad-Singh"
+        github: "https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/-Singh"
       },
       features: [
         "Query Optimization",
@@ -351,7 +351,7 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           <Button className="btn-accent group" asChild>
-            <a href="https://github.com/Ashirvad-Singh" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/-Singh" target="_blank" rel="noopener noreferrer">
               <Github className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
               View All Projects on GitHub
             </a>
