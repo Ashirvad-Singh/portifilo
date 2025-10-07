@@ -55,7 +55,6 @@ const Header = () => {
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -108,7 +107,7 @@ const Header = () => {
             {/* Social Links & Mobile Menu */}
             <div className="flex items-center space-x-4">
               {/* Theme Toggle */}
-              <ThemeToggle />
+            
 
               {/* Desktop Social Links */}
               <div className="hidden md:flex items-center space-x-3">
