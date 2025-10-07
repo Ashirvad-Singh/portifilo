@@ -30,7 +30,6 @@ const Index = () => {
           <Newsletter />
         </main>
         <Footer />
-        <BottomNav />
       </div>
     </>
   );
