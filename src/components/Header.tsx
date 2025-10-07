@@ -60,8 +60,8 @@ const Header = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/ashirvad' },
+    { icon: Github, href: 'https://github.com/Ashirvad-Singh/' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/ashirvad-singh-255491214/' },
     { icon: Mail, href: 'mailto:ashirvad2912@gmail.com' },
   ];
 

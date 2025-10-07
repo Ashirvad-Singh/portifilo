@@ -44,13 +44,13 @@ const Footer = () => {
     { 
       icon: Github, 
       name: "GitHub", 
-      href: "https://www.linkedin.com/in/ashirvad-singh-255491214/-Singh/",
+      href: "https://github.com/Ashirvad-Singh/",
       color: "hover:text-white"
     },
     { 
       icon: Linkedin, 
       name: "LinkedIn", 
-      href: "https://linkedin.com/in/ashirvad",
+      href: "https://www.linkedin.com/in/ashirvad-singh-255491214/",
       color: "hover:text-blue-400"
     },
     { 
