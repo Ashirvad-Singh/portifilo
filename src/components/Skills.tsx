@@ -65,21 +65,10 @@ const Skills = () => {
       icon: Code,
       color: "from-blue-500 to-cyan-500",
       skills: [
-        { name: "PHP", level: 90 },
-        { name: "JavaScript", level: 85 },
+        { name: "JavaScript", level: 90 },
         { name: "HTML/CSS", level: 95 },
-        { name: "Java", level: 75 },
-      ]
-    },
-    {
-      title: "CMS & Platforms",
-      icon: Settings,
-      color: "from-purple-500 to-pink-500",
-      skills: [
-        { name: "WordPress", level: 95 },
-        { name: "WooCommerce", level: 90 },
-        { name: "Elementor", level: 85 },
-      ]
+         { name: "Php", level: 75 },
+        { name: "Python", level: 65 }      ]
     },
     {
       title: "Frameworks & Libraries",
@@ -90,8 +79,11 @@ const Skills = () => {
         { name: "Tailwind CSS", level: 90 },
         { name: "Bootstrap", level: 80 },
         { name: "Node.js", level: 75 },
+        { name: "Express.js", level: 70 },
+        {}
       ]
     },
+
     {
       title: "Tools & Database",
       icon: Database,
@@ -99,7 +91,8 @@ const Skills = () => {
       skills: [
         { name: "Git/GitHub", level: 85 },
         { name: "MySQL", level: 80 },
-        { name: "AJAX", level: 75 },
+        { name: "MongoDB", level: 70 },
+        { name: "RESTful APIs", level: 80 },
         { name: "Mailchimp", level: 70 },
       ]
     },
