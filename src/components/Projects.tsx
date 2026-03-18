@@ -15,41 +15,52 @@ const Projects = () => {
     setIsTouchDevice(window.matchMedia('(hover: none)').matches);
   }, []);
 
-  useEffect(() => {
-    const fetchStarred = async () => {
-      try {
+ useEffect(() => {
+  const fetchAllStarred = async () => {
+    try {
+      let allRepos: any[] = [];
+      let page = 1;
+      let hasMore = true;
+
+      while (hasMore) {
         const res = await fetch(
-          'https://api.github.com/users/Ashirvad-Singh/starred?per_page=100&sort=created&direction=desc'
+          `https://api.github.com/users/Ashirvad-Singh/starred?per_page=100&page=${page}`
         );
         const data = await res.json();
 
-        const mapped = data
-          .map((repo: any) => ({
-            id: repo.id,
-            title: repo.name.replace(/-/g, ' '),
-            description: repo.description || 'No description available.',
-            image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`,
-            category: repo.language || 'Other',
-            tech: repo.language ? [repo.language] : [],
-            links: {
-              github: repo.html_url,
-              demo: repo.homepage || null,
-            },
-            stars: repo.stargazers_count,
-            owner: repo.owner.login,
-          }))
-          .slice(0, 7);
-
-        setProjects(mapped);
-      } catch (error) {
-        console.error('Error fetching starred repos:', error);
-      } finally {
-        setLoading(false);
+        if (data.length === 0) {
+          hasMore = false;
+        } else {
+          allRepos = [...allRepos, ...data];
+          page++;
+        }
       }
-    };
 
-    fetchStarred();
-  }, []);
+      const mapped = allRepos.map((repo: any) => ({
+        id: repo.id,
+        title: repo.name.replace(/-/g, ' '),
+        description: repo.description || 'No description available.',
+        image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`,
+        category: repo.language || 'Other',
+        tech: repo.language ? [repo.language] : [],
+        links: {
+          github: repo.html_url,
+          demo: repo.homepage || null,
+        },
+        stars: repo.stargazers_count,
+        owner: repo.owner.login,
+      }));
+
+      setProjects(mapped);
+    } catch (error) {
+      console.error('Error fetching starred repos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAllStarred();
+}, []);
 
   if (loading) {
     return (
