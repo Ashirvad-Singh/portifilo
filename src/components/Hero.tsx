@@ -124,7 +124,7 @@ const Hero: React.FC<HeroProps> = () => {
           {/* Dynamic Subtitle */}
           <div className="hero-subtitle text-xl md:text-2xl text-muted-foreground mb-8">
             <RollingText
-              text="WordPress Developer & Full-Stack Engineer"
+              text="Web Developer & Full-Stack Engineer"
               className="block mb-2"
               delay={0.6}
             />
@@ -137,7 +137,7 @@ const Hero: React.FC<HeroProps> = () => {
 
           {/* Description */}
           <p className="hero-description text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed">
-            I specialize in WordPress development, custom themes, and MERN stack
+            I specialize in Web development, custom themes, and MERN stack
             applications, with deep expertise in React, Node.js, and Next.js. I
             build SEO-friendly, responsive, and scalable solutions that deliver
             measurable results across industries. Currently exploring Generative
@@ -170,7 +170,7 @@ const Hero: React.FC<HeroProps> = () => {
                 6+
               </div>
               <div className="text-sm md:text-base text-muted-foreground mt-1">
-                WordPress Sites
+                Web Sites
               </div>
             </div>
             <div className="card-glass text-center p-4 rounded-lg shadow-lg">

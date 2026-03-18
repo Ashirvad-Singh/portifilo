@@ -1,8 +1,8 @@
-import { GraduationCap, Briefcase, MapPin, Calendar } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import RollingText from '@/components/RollingText';
+import { GraduationCap, Briefcase, MapPin, Calendar } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RollingText from "@/components/RollingText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,52 +12,52 @@ const About = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Section title animation
-      gsap.from('.about-title', {
+      gsap.from(".about-title", {
         y: 50,
         opacity: 0,
         duration: 1,
-        ease: 'power3.out',
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: '.about-title',
-          start: 'top 80%',
-        }
+          trigger: ".about-title",
+          start: "top 80%",
+        },
       });
 
       // Education timeline animation
-      gsap.from('.education-item', {
+      gsap.from(".education-item", {
         x: -100,
         opacity: 0,
         duration: 0.8,
         stagger: 0.2,
-        ease: 'power3.out',
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: '.education-section',
-          start: 'top 70%',
-        }
+          trigger: ".education-section",
+          start: "top 70%",
+        },
       });
 
       // Experience timeline animation
-      gsap.from('.experience-item', {
+      gsap.from(".experience-item", {
         x: 100,
         opacity: 0,
         duration: 0.8,
         stagger: 0.2,
-        ease: 'power3.out',
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: '.experience-section',
-          start: 'top 70%',
-        }
+          trigger: ".experience-section",
+          start: "top 70%",
+        },
       });
 
       // Timeline line animation
-      gsap.from('.timeline-line', {
+      gsap.from(".timeline-line", {
         scaleY: 0,
         duration: 1.5,
-        ease: 'power2.out',
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: '.timeline-line',
-          start: 'top 80%',
-        }
+          trigger: ".timeline-line",
+          start: "top 80%",
+        },
       });
     }, aboutRef);
 
@@ -69,15 +69,15 @@ const About = () => {
       institution: "Dr. A.P.J. Abdul Kalam Technical University",
       location: "Lucknow, India",
       period: "2022 - 2024",
-      achievement: "Specialized in Advanced Web Technologies"
+      achievement: "Specialized in Advanced Web Technologies",
     },
     {
       degree: "Bachelor of Computer Applications (BCA)",
       institution: "Lotus Institute of Management",
-      location: "Bareilly, India", 
+      location: "Bareilly, India",
       period: "2018 - 2021",
-      achievement: "Batch Topper & 2nd Place in Coding Competitions"
-    }
+      achievement: "Batch Topper & 2nd Place in Coding Competitions",
+    },
   ];
 
   const experience = [
@@ -87,12 +87,12 @@ const About = () => {
       location: "Mohali, Punjab",
       period: "March 2024 - Present",
       achievements: [
-        "Built and managed WordPress websites with responsive designs and seamless UX",
+        "Built and managed Web websites with responsive designs and seamless UX",
         "Developed custom plugins and tailored WooCommerce for e-commerce clients",
         "Collaborated with design team to improve website performance and SEO rankings",
-        "Delivered 6+ successful WordPress projects across various industries"
-      ]
-    }
+        "Delivered 6+ successful Web projects across various industries",
+      ],
+    },
   ];
 
   return (
@@ -104,8 +104,8 @@ const About = () => {
             <RollingText text="About Me" className="text-gradient" />
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            <RollingText 
-              text="WordPress-focused developer with expertise in building dynamic websites, learning management systems, and e-commerce solutions. Passionate about creating optimized solutions tailored to client needs." 
+            <RollingText
+              text="Web-focused developer with expertise in building dynamic websites, learning management systems, and e-commerce solutions. Passionate about creating optimized solutions tailored to client needs."
               delay={0.3}
             />
           </p>
@@ -127,8 +127,12 @@ const About = () => {
                   <div className="flex items-start gap-4">
                     <div className="w-3 h-3 bg-primary rounded-full mt-2 glow-primary group-hover:scale-125 transition-transform" />
                     <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gradient mb-2">{edu.degree}</h4>
-                      <h5 className="font-medium text-foreground mb-2">{edu.institution}</h5>
+                      <h4 className="text-lg font-semibold text-gradient mb-2">
+                        {edu.degree}
+                      </h4>
+                      <h5 className="font-medium text-foreground mb-2">
+                        {edu.institution}
+                      </h5>
                       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-3">
                         <div className="flex items-center gap-1">
                           <MapPin className="w-4 h-4" />
@@ -139,7 +143,9 @@ const About = () => {
                           {edu.period}
                         </div>
                       </div>
-                      <p className="text-accent font-medium">{edu.achievement}</p>
+                      <p className="text-accent font-medium">
+                        {edu.achievement}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -162,8 +168,12 @@ const About = () => {
                   <div className="flex items-start gap-4">
                     <div className="w-3 h-3 bg-accent rounded-full mt-2 glow-accent group-hover:scale-125 transition-transform" />
                     <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gradient mb-2">{exp.title}</h4>
-                      <h5 className="font-medium text-foreground mb-2">{exp.company}</h5>
+                      <h4 className="text-lg font-semibold text-gradient mb-2">
+                        {exp.title}
+                      </h4>
+                      <h5 className="font-medium text-foreground mb-2">
+                        {exp.company}
+                      </h5>
                       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
                         <div className="flex items-center gap-1">
                           <MapPin className="w-4 h-4" />
@@ -176,7 +186,10 @@ const About = () => {
                       </div>
                       <ul className="space-y-2">
                         {exp.achievements.map((achievement, i) => (
-                          <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <li
+                            key={i}
+                            className="text-sm text-muted-foreground flex items-start gap-2"
+                          >
                             <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
                             {achievement}
                           </li>

@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { Star, Quote } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import RollingText from './RollingText';
+import { useState, useEffect, useRef } from "react";
+import { Star, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import RollingText from "./RollingText";
 
 const Testimonials = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -14,8 +14,8 @@ const Testimonials = () => {
       role: "E-commerce Manager",
       company: "TechStart Solutions",
       rating: 5,
-      text: "Ashirvad delivered an exceptional WordPress e-commerce solution that exceeded our expectations. The custom WooCommerce integration boosted our sales by 40% within the first month.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+      text: "Ashirvad delivered an exceptional Web e-commerce solution that exceeded our expectations. The custom WooCommerce integration boosted our sales by 40% within the first month.",
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ const Testimonials = () => {
       company: "EduTech Innovations",
       rating: 5,
       text: "The Learning Management System Ashirvad built for us is incredible. The MERN stack implementation is robust, scalable, and user-friendly. Our student engagement increased by 25% since launch.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael"
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
     },
     {
       id: 3,
@@ -32,8 +32,8 @@ const Testimonials = () => {
       role: "Marketing Director",
       company: "Creative Agency Co.",
       rating: 5,
-      text: "Working with Ashirvad was a pleasure. He created a stunning WordPress theme that perfectly captured our brand identity. The site is fast, responsive, and ranks well on search engines.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily"
+      text: "Working with Ashirvad was a pleasure. He created a stunning Web theme that perfectly captured our brand identity. The site is fast, responsive, and ranks well on search engines.",
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
     },
     {
       id: 4,
@@ -41,8 +41,8 @@ const Testimonials = () => {
       role: "Business Owner",
       company: "Local Services LLC",
       rating: 5,
-      text: "Ashirvad transformed our outdated website into a modern, professional platform. The new WordPress site is easy to manage and has significantly improved our online presence.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David"
+      text: "Ashirvad transformed our outdated website into a modern, professional platform. The new Web site is easy to manage and has significantly improved our online presence.",
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
     },
     {
       id: 5,
@@ -51,15 +51,19 @@ const Testimonials = () => {
       company: "AI Solutions Inc.",
       rating: 5,
       text: "The AI portal website Ashirvad developed is exactly what we needed. Clean design, optimal performance, and seamless integration with our existing systems.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa"
-    }
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
+    },
   ];
 
   return (
-    <section ref={testimonialsRef} id="testimonials" className="py-20 relative overflow-hidden">
+    <section
+      ref={testimonialsRef}
+      id="testimonials"
+      className="py-20 relative overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -67,8 +71,8 @@ const Testimonials = () => {
             <RollingText text="Meet Our Team" className="text-gradient" />
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            <RollingText 
-              text="Talented professionals who bring ideas to life with creativity and expertise" 
+            <RollingText
+              text="Talented professionals who bring ideas to life with creativity and expertise"
               delay={0.3}
             />
           </p>
@@ -98,7 +102,7 @@ const Testimonials = () => {
                   alt={member.name}
                   className="w-full h-full object-cover"
                 />
-                
+
                 {/* Overlay */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"
@@ -117,7 +121,7 @@ const Testimonials = () => {
                       exit={{ opacity: 0 }}
                     >
                       <div className="text-center">
-                        {member.name.split('').map((char, i) => (
+                        {member.name.split("").map((char, i) => (
                           <motion.span
                             key={i}
                             className="inline-block text-2xl font-bold text-gradient"
@@ -127,14 +131,14 @@ const Testimonials = () => {
                             transition={{
                               duration: 0.3,
                               delay: i * 0.03,
-                              ease: "backOut"
+                              ease: "backOut",
                             }}
-                            style={{ 
-                              transformOrigin: 'center bottom',
-                              display: char === ' ' ? 'inline' : 'inline-block'
+                            style={{
+                              transformOrigin: "center bottom",
+                              display: char === " " ? "inline" : "inline-block",
                             }}
                           >
-                            {char === ' ' ? '\u00A0' : char}
+                            {char === " " ? "\u00A0" : char}
                           </motion.span>
                         ))}
                         <motion.p
@@ -156,7 +160,9 @@ const Testimonials = () => {
                 className="mt-3 text-center"
                 animate={{ opacity: hoveredIndex === index ? 0 : 1 }}
               >
-                <h4 className="font-semibold text-foreground text-sm">{member.name}</h4>
+                <h4 className="font-semibold text-foreground text-sm">
+                  {member.name}
+                </h4>
                 <p className="text-xs text-muted-foreground">{member.role}</p>
               </motion.div>
             </motion.div>
@@ -165,7 +171,9 @@ const Testimonials = () => {
 
         {/* Testimonial Cards */}
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-8 text-gradient">What They Say</h3>
+          <h3 className="text-2xl font-bold text-center mb-8 text-gradient">
+            What They Say
+          </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.slice(0, 3).map((member, index) => (
               <motion.div
@@ -190,7 +198,10 @@ const Testimonials = () => {
                 {/* Rating */}
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(member.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                    <Star
+                      key={i}
+                      className="w-4 h-4 fill-primary text-primary"
+                    />
                   ))}
                 </div>
 
@@ -202,9 +213,15 @@ const Testimonials = () => {
                     className="w-10 h-10 rounded-full"
                   />
                   <div>
-                    <h4 className="font-semibold text-foreground text-sm">{member.name}</h4>
-                    <p className="text-xs text-muted-foreground">{member.role}</p>
-                    <p className="text-xs text-primary font-medium">{member.company}</p>
+                    <h4 className="font-semibold text-foreground text-sm">
+                      {member.name}
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      {member.role}
+                    </p>
+                    <p className="text-xs text-primary font-medium">
+                      {member.company}
+                    </p>
                   </div>
                 </div>
               </motion.div>
