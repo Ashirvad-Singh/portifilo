@@ -10,39 +10,38 @@ const Projects = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchRepos = async () => {
+  useEffect(() => {
+  const fetchStarred = async () => {
     try {
       const res = await fetch(
-        'https://api.github.com/users/Ashirvad-Singh/repos?per_page=100'
+        'https://api.github.com/users/Ashirvad-Singh/starred?per_page=100'
       );
       const data = await res.json();
 
-      const mapped = data
-        .filter((repo: any) => !repo.fork)
-        .map((repo: any) => ({
-          id: repo.id,
-          title: repo.name.replace(/-/g, ' '),
-          description: repo.description || 'No description available.',
-          image:
-            'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80',
-          category: repo.language || 'Other',
-          tech: repo.language ? [repo.language] : [],
-          links: {
-            github: repo.html_url,
-            demo: repo.homepage || null,
-          },
-        }));
+      const mapped = data.map((repo: any) => ({
+        id: repo.id,
+        title: repo.name.replace(/-/g, ' '),
+        description: repo.description || 'No description available.',
+        image:
+          'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80',
+        category: repo.language || 'Other',
+        tech: repo.language ? [repo.language] : [],
+        links: {
+          github: repo.html_url,
+          demo: repo.homepage || null,
+        },
+        stars: repo.stargazers_count,
+      }));
 
       setProjects(mapped);
     } catch (error) {
-      console.error('GitHub fetch failed:', error);
+      console.error('GitHub starred fetch failed:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  fetchRepos();
+  fetchStarred();
 }, []);
 
   if (loading) {
