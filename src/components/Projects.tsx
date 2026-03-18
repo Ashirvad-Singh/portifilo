@@ -10,43 +10,40 @@ const Projects = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchPinned = async () => {
-      try {
-        const res = await fetch('/api/pinned');
-        const data = await res.json();
+useEffect(() => {
+  const fetchRepos = async () => {
+    try {
+      const res = await fetch(
+        'https://api.github.com/users/Ashirvad-Singh/repos?per_page=100'
+      );
+      const data = await res.json();
 
-        const mapped = data
-          .filter(repo => !repo.fork)
-          .map(repo => ({
-            id: repo.id,
-            title: repo.name.replace(/-/g, ' '),
-            description: repo.description || 'Pinned GitHub project.',
-            image:
-              'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80',
-            category: 'Pinned',
-            tech: repo.languages.nodes.map((l: any) => l.name),
-            links: {
-              github: repo.url,
-              demo: repo.homepageUrl || null,
-            },
-          }));
+      const mapped = data
+        .filter((repo: any) => !repo.fork)
+        .map((repo: any) => ({
+          id: repo.id,
+          title: repo.name.replace(/-/g, ' '),
+          description: repo.description || 'No description available.',
+          image:
+            'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80',
+          category: repo.language || 'Other',
+          tech: repo.language ? [repo.language] : [],
+          links: {
+            github: repo.html_url,
+            demo: repo.homepage || null,
+          },
+        }));
 
-        // Remove duplicates by title
-        const unique = mapped.filter(
-          (v, i, a) => a.findIndex(t => t.title === v.title) === i
-        );
+      setProjects(mapped);
+    } catch (error) {
+      console.error('GitHub fetch failed:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setProjects(unique);
-      } catch (error) {
-        console.error('GitHub fetch failed:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPinned();
-  }, []);
+  fetchRepos();
+}, []);
 
   if (loading) {
     return (
