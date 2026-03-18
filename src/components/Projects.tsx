@@ -35,7 +35,7 @@ const Projects = () => {
           stars: repo.stargazers_count,
           owner: repo.owner.login,
         }))
-        .slice(0, 10); // ✅ only 10 projects
+        .slice(0, 7); // ✅ only 10 projects
 
       setProjects(mapped);
     } catch (error) {
