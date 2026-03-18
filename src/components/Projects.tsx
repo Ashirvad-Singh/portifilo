@@ -6,9 +6,14 @@ import { Badge } from '@/components/ui/badge';
 import RollingText from './RollingText';
 
 const Projects = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0); // ✅ first open
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+  }, []);
 
   useEffect(() => {
     const fetchStarred = async () => {
@@ -23,7 +28,7 @@ const Projects = () => {
             id: repo.id,
             title: repo.name.replace(/-/g, ' '),
             description: repo.description || 'No description available.',
-            image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`, // ✅ stable image
+            image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`,
             category: repo.language || 'Other',
             tech: repo.language ? [repo.language] : [],
             links: {
@@ -33,7 +38,7 @@ const Projects = () => {
             stars: repo.stargazers_count,
             owner: repo.owner.login,
           }))
-          .slice(0, 7); // ✅ only first 7 repos
+          .slice(0, 7);
 
         setProjects(mapped);
       } catch (error) {
@@ -49,15 +54,7 @@ const Projects = () => {
   if (loading) {
     return (
       <div className="text-center py-12 text-muted-foreground animate-pulse">
-        Loading starred projects...
-      </div>
-    );
-  }
-
-  if (projects.length === 0) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">
-        No starred projects found.
+        Loading projects...
       </div>
     );
   }
@@ -65,22 +62,20 @@ const Projects = () => {
   return (
     <section id="projects" className="py-12 relative overflow-hidden">
       <div className="container mx-auto px-6">
+
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="heading-lg mb-6">
             <RollingText text="Starred Projects" className="text-gradient" />
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            <RollingText
-              text="Repositories I find interesting and worth exploring."
-              delay={0.3}
-            />
+          <p className="text-muted-foreground">
+            Tap / Hover to explore projects
           </p>
         </div>
 
-        {/* Project Cards */}
-        <div className="relative flex flex-col md:flex-row gap-4 h-auto md:h-[600px] mb-12">
-          <AnimatePresence mode="popLayout">
+        {/* Cards */}
+        <div className="flex flex-col md:flex-row gap-4 h-auto md:h-[600px]">
+          <AnimatePresence>
             {projects.map((project, index) => {
               const isExpanded = hoveredIndex === index;
               const isOthersHovered =
@@ -90,20 +85,25 @@ const Projects = () => {
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileTap={{ scale: 0.97 }} // 🔥 mobile feedback
+                  onClick={() => {
+                    if (isTouchDevice) {
+                      setHoveredIndex(
+                        hoveredIndex === index ? null : index
+                      );
+                    }
+                  }}
+                  onHoverStart={() => {
+                    if (!isTouchDevice) setHoveredIndex(index);
+                  }}
+                  onHoverEnd={() => {
+                    if (!isTouchDevice) setHoveredIndex(null);
+                  }}
                   animate={{
-                    opacity: 1,
-                    scale: 1,
-                    flex: isExpanded ? 3 : isOthersHovered ? 0.5 : 1,
+                    flex: isExpanded ? 3 : isOthersHovered ? 0.6 : 1,
                   }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{
-                    duration: 0.5,
-                    ease: [0.4, 0, 0.2, 1],
-                  }}
-                  onHoverStart={() => setHoveredIndex(index)}
-                  onHoverEnd={() => setHoveredIndex(null)}
-                  className="relative rounded-3xl overflow-hidden cursor-pointer group min-h-[400px]"
+                  transition={{ duration: 0.4 }}
+                  className="relative rounded-3xl overflow-hidden cursor-pointer min-h-[400px]"
                   style={{
                     backgroundImage: `url(${project.image})`,
                     backgroundSize: 'cover',
@@ -111,38 +111,30 @@ const Projects = () => {
                   }}
                 >
                   {/* Overlay */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"
-                    animate={{ opacity: isExpanded ? 0.95 : 0.7 }}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-                  <div className="relative h-full flex flex-col justify-between p-6 space-y-4">
-                    <Badge
-                      variant="outline"
-                      className="glass border-primary/30 text-primary"
-                    >
-                      Starred
+                  <div className="relative h-full flex flex-col justify-between p-6">
+
+                    {/* Top */}
+                    <Badge className="w-fit bg-white/10 text-white border-0">
+                      ⭐ Starred
                     </Badge>
 
-                    <motion.h3
-                      className="text-2xl font-bold text-gradient"
-                      animate={{
-                        fontSize: isExpanded ? '2rem' : '1.5rem',
-                      }}
-                    >
+                    {/* Title */}
+                    <h3 className="text-xl md:text-2xl font-bold text-white">
                       {project.title}
-                    </motion.h3>
+                    </h3>
 
+                    {/* Expanded Content */}
                     <AnimatePresence>
                       {isExpanded && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="space-y-4"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          className="space-y-3"
                         >
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-white/80">
                             {project.description}
                           </p>
 
@@ -150,22 +142,21 @@ const Projects = () => {
                             {project.tech.map((t: string, i: number) => (
                               <span
                                 key={i}
-                                className="px-3 py-1 text-xs glass rounded-lg border border-white/10"
+                                className="text-xs px-2 py-1 bg-white/10 rounded"
                               >
                                 {t}
                               </span>
                             ))}
                           </div>
 
-                          <div className="flex gap-3 pt-2">
+                          <div className="flex gap-2">
                             {project.links.demo && (
-                              <Button size="sm" className="btn-primary" asChild>
+                              <Button size="sm" asChild>
                                 <a
                                   href={project.links.demo}
                                   target="_blank"
-                                  rel="noopener noreferrer"
                                 >
-                                  <Eye className="w-4 h-4 mr-2" />
+                                  <Eye className="w-4 h-4 mr-1" />
                                   Demo
                                 </a>
                               </Button>
@@ -174,22 +165,25 @@ const Projects = () => {
                               <a
                                 href={project.links.github}
                                 target="_blank"
-                                rel="noopener noreferrer"
                               >
-                                <Github className="w-4 h-4 mr-2" />
-                                Source
+                                <Github className="w-4 h-4 mr-1" />
+                                Code
                               </a>
                             </Button>
+                          </div>
+
+                          {/* ⭐ Stars */}
+                          <div className="text-xs text-white/70">
+                            ⭐ {project.stars}
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
 
                     {!isExpanded && (
-                      <motion.div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <ExternalLink className="w-3 h-3" />
-                        Hover to explore
-                      </motion.div>
+                      <div className="text-xs text-white/60">
+                        {isTouchDevice ? 'Tap to open' : 'Hover to explore'}
+                      </div>
                     )}
                   </div>
                 </motion.div>
@@ -198,16 +192,15 @@ const Projects = () => {
           </AnimatePresence>
         </div>
 
-        {/* GitHub Profile */}
+        {/* Footer */}
         <div className="text-center mt-10">
           <Button asChild>
             <a
               href="https://github.com/Ashirvad-Singh"
               target="_blank"
-              rel="noopener noreferrer"
             >
               <Github className="w-5 h-5 mr-2" />
-              View GitHub Profile
+              Visit GitHub
             </a>
           </Button>
         </div>
