@@ -10,48 +10,46 @@ const Projects = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
- useEffect(() => {
-  const fetchStarred = async () => {
-    try {
-      const res = await fetch(
-        'https://api.github.com/users/Ashirvad-Singh/starred?per_page=100&sort=created&direction=desc'
-      );
-      const data = await res.json();
+  useEffect(() => {
+    const fetchStarred = async () => {
+      try {
+        const res = await fetch(
+          'https://api.github.com/users/Ashirvad-Singh/starred?per_page=100&sort=created&direction=desc'
+        );
+        const data = await res.json();
 
-      const mapped = data
-        .map((repo: any) => ({
-          id: repo.id,
-          title: repo.name.replace(/-/g, ' '),
-          description: repo.description || 'No description available.',
-          image: `https://source.unsplash.com/800x600/?${
-            repo.language || 'technology'
-          }`,
-          category: repo.language || 'Other',
-          tech: repo.language ? [repo.language] : [],
-          links: {
-            github: repo.html_url,
-            demo: repo.homepage || null,
-          },
-          stars: repo.stargazers_count,
-          owner: repo.owner.login,
-        }))
-        .slice(0, 7); // ✅ only 10 projects
+        const mapped = data
+          .map((repo: any) => ({
+            id: repo.id,
+            title: repo.name.replace(/-/g, ' '),
+            description: repo.description || 'No description available.',
+            image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`, // ✅ stable image
+            category: repo.language || 'Other',
+            tech: repo.language ? [repo.language] : [],
+            links: {
+              github: repo.html_url,
+              demo: repo.homepage || null,
+            },
+            stars: repo.stargazers_count,
+            owner: repo.owner.login,
+          }))
+          .slice(0, 7); // ✅ only first 7 repos
 
-      setProjects(mapped);
-    } catch (error) {
-      console.error('Error fetching starred repos:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setProjects(mapped);
+      } catch (error) {
+        console.error('Error fetching starred repos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchStarred();
-}, []);
+    fetchStarred();
+  }, []);
 
   if (loading) {
     return (
       <div className="text-center py-12 text-muted-foreground animate-pulse">
-        Loading your pinned projects...
+        Loading starred projects...
       </div>
     );
   }
@@ -59,7 +57,7 @@ const Projects = () => {
   if (projects.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
-        No pinned projects found on your GitHub profile.
+        No starred projects found.
       </div>
     );
   }
@@ -70,11 +68,11 @@ const Projects = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="heading-lg mb-6">
-            <RollingText text="Pinned Projects" className="text-gradient" />
+            <RollingText text="Starred Projects" className="text-gradient" />
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             <RollingText
-              text="My highlighted repositories — a curated list of my best work from GitHub."
+              text="Repositories I find interesting and worth exploring."
               delay={0.3}
             />
           </p>
@@ -112,7 +110,7 @@ const Projects = () => {
                     backgroundPosition: 'center',
                   }}
                 >
-                  {/* Gradient Overlay */}
+                  {/* Overlay */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"
                     animate={{ opacity: isExpanded ? 0.95 : 0.7 }}
@@ -123,7 +121,7 @@ const Projects = () => {
                       variant="outline"
                       className="glass border-primary/30 text-primary"
                     >
-                      Pinned
+                      Starred
                     </Badge>
 
                     <motion.h3
@@ -152,7 +150,7 @@ const Projects = () => {
                             {project.tech.map((t: string, i: number) => (
                               <span
                                 key={i}
-                                className="px-3 py-1 text-xs glass rounded-lg text-foreground border border-white/10"
+                                className="px-3 py-1 text-xs glass rounded-lg border border-white/10"
                               >
                                 {t}
                               </span>
@@ -168,7 +166,7 @@ const Projects = () => {
                                   rel="noopener noreferrer"
                                 >
                                   <Eye className="w-4 h-4 mr-2" />
-                                  View Demo
+                                  Demo
                                 </a>
                               </Button>
                             )}
@@ -200,8 +198,8 @@ const Projects = () => {
           </AnimatePresence>
         </div>
 
-        {/* View All */}
-        <motion.div className="text-center mt-10 opacity-70 hover:opacity-100 transition">
+        {/* GitHub Profile */}
+        <div className="text-center mt-10">
           <Button asChild>
             <a
               href="https://github.com/Ashirvad-Singh"
@@ -212,7 +210,7 @@ const Projects = () => {
               View GitHub Profile
             </a>
           </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
